@@ -15,7 +15,8 @@ jobs:
           distribution: temurin
           java-version: '17'
       # Use the Android SDK already installed on GitHub's Ubuntu runner.
-      - run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Check Android SDK
+        run: echo "ANDROID_HOME=$ANDROID_HOME" && ls "$ANDROID_HOME/platforms" && ls "$ANDROID_HOME/build-tools"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
