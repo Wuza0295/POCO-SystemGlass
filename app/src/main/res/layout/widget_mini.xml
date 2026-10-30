@@ -1,0 +1,4 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="10dp" android:orientation="vertical" android:background="@drawable/glass">
+<TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="◈ SYSTEMGLASS  ·  MINI" android:textColor="#91E8FF" android:textStyle="bold" android:textSize="12sp"/>
+<TextView android:id="@+id/miniBattery" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="AKKU  --%" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="22sp" android:paddingTop="5dp"/><TextView android:id="@+id/miniInfo" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RAM -- GB  ·  Speicher -- GB" android:textColor="#FFFFFF" android:textStyle="normal" android:textSize="12sp" android:paddingTop="5dp"/>
+</LinearLayout>
