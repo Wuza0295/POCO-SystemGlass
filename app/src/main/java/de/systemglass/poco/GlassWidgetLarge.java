@@ -1,0 +1,1 @@
+package de.systemglass.poco; public class GlassWidgetLarge extends GlassWidget {}
