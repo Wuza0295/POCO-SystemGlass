@@ -26,8 +26,8 @@ jobs:
           APK=app/build/outputs/apk/debug/app-debug.apk
           AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt -type f | sort -V | tail -n 1)
           "$AAPT" dump badging "$APK" | grep '^package:'
-          "$AAPT" dump badging "$APK" | grep -q "versionName='1.2'"
+          "$AAPT" dump badging "$APK" | grep -q "versionName='1.3'"
       - uses: actions/upload-artifact@v4
         with:
-          name: POCO-SystemGlass-1.2-debug
+          name: POCO-SystemGlass-1.3-debug
           path: app/build/outputs/apk/debug/app-debug.apk
