@@ -1,0 +1,3 @@
+package de.systemglass.poco;
+import android.app.*;import android.os.*;import android.graphics.Color;import android.widget.*;
+public class PreviewActivity extends Activity {public void onCreate(Bundle b){super.onCreate(b);LinearLayout root=new LinearLayout(this);root.setOrientation(1);root.setPadding(30,30,30,30);root.setBackgroundColor(Color.rgb(16,22,33));for(String size:new String[]{"POCO SystemGlass · Vorschau","3 × 2 · Kompakt","4 × 3 · Standard","4 × 4 · Detail"}){TextView t=new TextView(this);t.setText(size+"\nAkku · RAM · Speicher · Netzwerk · Gerät");t.setTextSize(18);t.setTextColor(Color.WHITE);t.setPadding(15,25,15,25);root.addView(t);}setContentView(root);}}
