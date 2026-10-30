@@ -1,1 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="12dp" android:orientation="vertical" android:background="@drawable/glass"><TextView android:id="@+id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="SYSTEMGLASS" android:textColor="#85E4FF" android:textStyle="bold" android:textSize="12sp"/><TextView android:id="@+id/stats" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:gravity="center_vertical" android:textColor="#FFFFFF" android:textSize="13sp"/><TextView android:id="@+id/footer" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#A5B6C6" android:textSize="10sp"/></LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="12dp" android:orientation="vertical" android:background="@drawable/glass">
+    <TextView android:id="@+id/header" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="◈ SYSTEMGLASS"
+        android:textColor="#91E8FF" android:textStyle="bold" android:letterSpacing="0.1"
+        android:textSize="12sp" android:singleLine="true"/>
+    <TextView android:id="@+id/stats" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1"
+        android:gravity="center_vertical" android:textColor="#FFFFFFFF"
+        android:textStyle="bold" android:textSize="13sp" android:maxLines="3"/>
+    <TextView android:id="@+id/footer" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:textColor="#C3D5E7"
+        android:textSize="10sp" android:singleLine="true" android:ellipsize="end"/>
+</LinearLayout>
