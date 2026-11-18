@@ -110,7 +110,7 @@ public class MainActivity extends Activity {
     private Button button(String label, int background, int foreground) {
         Button view = new Button(this);
         view.setText(label);
-        view.setTextAllCaps(false);
+        view.setAllCaps(false);
         view.setTextColor(foreground);
         view.setTextSize(15);
         view.setBackground(roundRect(background, background, 0, 16));
