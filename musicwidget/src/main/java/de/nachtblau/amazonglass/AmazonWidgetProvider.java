@@ -37,28 +37,29 @@ public class AmazonWidgetProvider extends AppWidgetProvider {
         v.setOnClickPendingIntent(R.id.next, action(context, PlayerActionReceiver.NEXT, id * 10 + 3));
         v.setOnClickPendingIntent(R.id.open, action(context, PlayerActionReceiver.OPEN, id * 10 + 4));
         v.setOnClickPendingIntent(R.id.art, action(context, PlayerActionReceiver.OPEN, id * 10 + 5));
-
-        MediaController controller = findAmazon(context);
-        if (controller != null) {
-            MediaMetadata metadata = controller.getMetadata();
-            String title = metadata == null ? null : metadata.getString(MediaMetadata.METADATA_KEY_TITLE);
-            String artist = metadata == null ? null : metadata.getString(MediaMetadata.METADATA_KEY_ARTIST);
+        v.setOnClickPendingIntent(R.id.track_info, action(context, PlayerActionReceiver.OPEN, id * 10 + 6));
+        MediaController c = findAmazon(context);
+        if (c != null) {
+            MediaMetadata m = c.getMetadata();
+            String title = m == null ? "Amazon Music" : m.getString(MediaMetadata.METADATA_KEY_TITLE);
+            String artist = m == null ? "Wiedergabe aktiv" : m.getString(MediaMetadata.METADATA_KEY_ARTIST);
             v.setTextViewText(R.id.title, title == null || title.isEmpty() ? "Amazon Music" : title);
-            v.setTextViewText(R.id.artist, artist == null || artist.isEmpty() ? "Wiedergabe aktiv" : artist);
-            Bitmap art = metadata == null ? null : metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
-            if (art == null && metadata != null) art = metadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
+            v.setTextViewText(R.id.artist, artist == null || artist.isEmpty() ? "Amazon Music" : artist);
+            Bitmap art = m == null ? null : m.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+            if (art == null && m != null) art = m.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (art != null) v.setImageViewBitmap(R.id.art, art);
-            PlaybackState state = controller.getPlaybackState();
-            boolean playing = state != null && state.getState() == PlaybackState.STATE_PLAYING;
-            v.setTextViewText(R.id.play, playing ? "Ⅱ" : "▶");
-            long duration = metadata == null ? 0 : metadata.getLong(MediaMetadata.METADATA_KEY_DURATION);
-            long position = state == null ? 0 : Math.max(0, state.getPosition());
-            int progress = duration > 0 ? (int)Math.min(1000, position * 1000 / duration) : 0;
-            v.setProgressBar(R.id.progress, 1000, progress, false);
+            PlaybackState s = c.getPlaybackState();
+            boolean playing = s != null && s.getState() == PlaybackState.STATE_PLAYING;
+            v.setImageViewResource(R.id.play, playing ? R.drawable.ic_pause : R.drawable.ic_play);
+            v.setContentDescription(R.id.play, playing ? "Wiedergabe pausieren" : "Wiedergabe starten");
+            long duration = m == null ? 0 : m.getLong(MediaMetadata.METADATA_KEY_DURATION);
+            long position = s == null ? 0 : Math.max(0, s.getPosition());
+            v.setProgressBar(R.id.progress, 1000, duration > 0 ? (int)Math.min(1000, position * 1000 / duration) : 0, false);
         } else {
             v.setTextViewText(R.id.title, "Amazon Music");
-            v.setTextViewText(R.id.artist, "Wiedergabe starten");
-            v.setTextViewText(R.id.play, "▶");
+            v.setTextViewText(R.id.artist, "Widget verbinden – App öffnen");
+            v.setImageViewResource(R.id.play, R.drawable.ic_play);
+            v.setContentDescription(R.id.play, "Wiedergabe starten");
             v.setProgressBar(R.id.progress, 1000, 0, false);
         }
         manager.updateAppWidget(id, v);
@@ -66,13 +67,10 @@ public class AmazonWidgetProvider extends AppWidgetProvider {
 
     static MediaController findAmazon(Context context) {
         try {
-            MediaSessionManager manager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
-            List<MediaController> sessions = manager.getActiveSessions(new ComponentName(context, AmazonMusicListener.class));
-            if (sessions == null) return null;
-            for (MediaController controller : sessions) {
-                if ("com.amazon.mp3".equals(controller.getPackageName())) return controller;
-            }
-        } catch (SecurityException ignored) { }
+            MediaSessionManager msm = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+            List<MediaController> sessions = msm.getActiveSessions(new ComponentName(context, AmazonMusicListener.class));
+            for (MediaController c : sessions) if ("com.amazon.mp3".equals(c.getPackageName())) return c;
+        } catch (Exception ignored) { }
         return null;
     }
 }
