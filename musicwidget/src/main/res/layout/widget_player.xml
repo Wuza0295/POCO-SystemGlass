@@ -28,9 +28,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:letterSpacing="0.08"
+            android:letterSpacing="0.1"
             android:maxLines="1"
-            android:text="NACHTBLAU  ·  AMAZON MUSIC"
+            android:text="NOW PLAYING  ·  AMAZON MUSIC"
             android:textColor="#72DFF4"
             android:textSize="9sp"
             android:textStyle="bold" />
