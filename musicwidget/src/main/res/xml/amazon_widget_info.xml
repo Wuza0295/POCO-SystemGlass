@@ -1,0 +1,9 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="280dp"
+    android:minHeight="104dp"
+    android:initialLayout="@layout/widget_player"
+    android:previewImage="@drawable/ic_music"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen"
+    android:updatePeriodMillis="0"
+    android:description="@string/widget_description" />
